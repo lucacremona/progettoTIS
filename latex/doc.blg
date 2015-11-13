@@ -1,0 +1,62 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Arch Linux)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: doc.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated wiz_functions (elt_size=8) to 6000 items from 3000.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Database file #1: biblio.bib
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Too many commas in name 1 of "Ferrara, Varol, Davis, Menczer, Flammini" for entry IndianaUniversity
+while executing---line 2419 of file IEEEtran.bst
+Too many commas in name 1 of "Ferrara, Varol, Davis, Menczer, Flammini" for entry IndianaUniversity
+while executing---line 2419 of file IEEEtran.bst
+Warning--empty booktitle in IndianaUniversity
+
+Done.
+You've used 2 entries,
+            4039 wiz_defined-function locations,
+            820 strings with 7423 characters,
+and the built_in function-call counts, 877 in all, are:
+= -- 58
+> -- 8
+< -- 0
++ -- 4
+- -- 2
+* -- 47
+:= -- 169
+add.period$ -- 4
+call.type$ -- 2
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 3
+duplicate$ -- 67
+empty$ -- 88
+format.name$ -- 2
+if$ -- 172
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 14
+newline$ -- 31
+num.names$ -- 2
+pop$ -- 43
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 64
+stack$ -- 0
+substring$ -- 4
+swap$ -- 32
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 2
+warning$ -- 1
+while$ -- 2
+width$ -- 3
+write$ -- 40
+(There were 2 error messages)

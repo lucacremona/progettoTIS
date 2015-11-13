@@ -35,7 +35,7 @@ int main() {
     string c100[] = {"%Milan%Fashion%Week%", "%#%MFW%", "%Settimana%della%Moda%Milano"};
     string c80[] = {"%#%FW15%", "%Settimana%della%Moda%15"};
     string c60[] = {"%FW%", "%Settimana%della%Moda%", "%Milan%Moda%", "%Camera%Moda", "%Fashion%Week%"};
-    string c40[] = {"%Moda%", "%Fashion%", "%AW15%"};
+    string c40[] = {"%Moda%", "%Fashion%", "%AW%15%"};
     string c20[] = {"%Sfilate%", "%Design%", "%Stile%", "%Trend%", "%Collection%", "%collezione%", "%smith%", "%galliano%", "%hilfiger%", "%fiorucci%", "%wang%", "%karan%", "%prada%", "%facchinetti%", "%lagerfeld%", "%armani%", "%balenciaga%", "%tod%s%", "%nannini%", "%fay%", "%miu%", "%moschino%", "%pucci%", "%ford%", "%viktor&rolf%", "%desquared%", "%pinko%", "%roccobarocco%", "%velentino%", "%dolce%", "%gabbana%", "%cavalli%", "%biagiotti%", "%soprani%", "%ferragamo%", "%ferrè%", "%laurent%", "%zegna%", "%westwood%", "%krizia%", "%riva%", "%martini%", "%schon%", "%dior%", "%gaultier%", "%versace%", "%chanel%", "%gucci%", "%prada%", "%desigual%", "%versace%", "%blumarine%", "%moncler%", "%richmond%", "%rinaldi%", "%etro%", "%vuitton%", "%marani%", "%shoe%", "%sisley%", "%twin-set%", "%chloè%", "%barbonese%", "%stefanel%", "%guess%", "%klein%", "%fendi%", "%kenzo%", "%conti%", "%diesel%", "%trussardi%", "%black%", "%byblos%", "%glenfield%", "%timberland%", "%jo%", "%rose%", "%max&co%", "%pepe%", "%exte%", "%orciani%", "%missoni%", "%sempione%", "%barcelona%", "%matiè%", "%laltramoda%", "%merrel%", "%paul&shark%", "%seventy%", "%gattinoni%", "%pirelli%", "%gas%", "%rykiel%", "%derencuny%", "%sails%", "%blauer%", "%woolrich%", "%frani%", "%gigli%", "%sander%", "%mara%", "%malo%", "%cardin%", "%choo%", "%laboutin%", "%burberry%", "%piana%", "%iceberg%", "%barbonese%", "%queen%", "%yachting%", "%marras%", "%repetto%", "%hackerman%", "%lacoste%", "%martina%", "%belstaff%"};
 
     MYSQL *conn;
@@ -43,7 +43,7 @@ int main() {
     MYSQL_ROW row;
     char *server = "localhost";
     char *user = "root";
-    char *password = "root"; /* set me first */
+    char *password = "melone"; /* set me first */
     char *database = "mfw";
     conn = mysql_init(NULL);
     /* Connect to database */
