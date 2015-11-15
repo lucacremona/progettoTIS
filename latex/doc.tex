@@ -62,7 +62,7 @@ Email: federico.migliavacca@mail.polimi.it, giancarlo.colaci@mail.polimi.it, luc
 \maketitle
 
 \begin{abstract}
-	This paper presents an experimental analysis for bot searching into a quite big set of data provided. We also analyse the entire set of data to discover similarity beyond tweets using technique well known in literature. The final goal of this work is to search into the filtered dataset to get information about the relevance of tweets to a given topic, by following a set of appropriately chosen keywords.
+	This paper presents an experimental analysis for bot searching into a quite big set of data provided. We also analyse the entire set of data to discover similarities beyond tweets using technique well known in literature. The final goal of this work is to search into the filtered dataset to get information about the relevance of tweets to a given topic, by following a set of appropriately chosen keywords.
 \end{abstract}
 
 \section{Problem statement}\label{sec:intro}
@@ -73,10 +73,10 @@ The provided dataset is essentially an .xls file composed of about 180.000 row, 
 	\item link: contains the URL of the tweet;
 	\item time: date and time of tweet;
 	\item auth: number of auth;
-	\item follower: number of "follower" of the user; 
+	\item follower: number of "followers" of the user; 
 	\item following: number of "following" by the user;
 	\item country: country of the user;
-	\item location: location in which was produced the tweet;
+	\item location: location in which the tweet has been produced;
 	\item contents: contains the full text of the tweet;
 \end{itemize}
 After our manipulation the table in mySql DB contains two extra rows:
@@ -113,7 +113,7 @@ Released in 2014, "Bot or Not?" was the first social bot detection interface for
 \end{figure}
 \medskip
 
-Alvisi et al. recognized first the need of adopting complementary detection techniques to effectively deal with sybil attacks in social networks. The Renren Sybil detector is an example of system that explores multiple dimensions of users' behaviors like activity and timing information. Examination of ground-truth clickstream data shows that real users spend comparatively more time messaging and looking at other users' contents (such as photos and videos), whereas Sybil accounts spend their time harvesting profiles and befriending other accounts. Intuitively, social bot activities tend to be simpler in terms of variety of behavior exhibited.
+Alvisi et al. first recognized the need of adopting complementary detection techniques to effectively deal with Sybil attacks in social networks. The Renren Sybil detector is an example of system that explores multiple dimensions of users' behaviors like activity and timing information. Examination of ground-truth clickstream data shows that real users spend comparatively more time messaging and looking at other users' contents (such as photos and videos), whereas Sybil accounts spend their time harvesting profiles and befriending other accounts. Intuitively, social bot activities tend to be simpler in terms of variety of behavior exhibited.
 \medskip
 
 Efforts in the direction of studying platforms vulnerability already started. Some researchers, for example, reverse-engineer social bots reporting alarming results: simple automated mechanisms that produce contents and boost followers yield successful infiltration strategies and increase the social influence of the
@@ -124,11 +124,11 @@ Yet many research questions remain open. For example, nobody knows exactly how m
 
 \section{Experimental Analysis}\label{sec:experimental analysis}
 \medskip
-We can divide our experimental analysis into two parts. The first part mainly covers techniques to eliminate bots while the second attempts to join the difficult problem of detect the relevance of tweets with respect to a certain topic. To reach both goals we decided to build a set of query.
-The query reported in this paper are also included in a final script that solve the problem for this specific set of data. The script is essentially developed in c++ 2011. The connector for mySql is developed in C. For more information about it and to clone the complete code hosted on GitHub platform follow this link: \url{https://github.com/lucacremona/progettoTIS}
+We can divide our experimental analysis into two parts. The first part mainly covers techniques to eliminate bots while the second attempts to join the difficult problem of detecting the relevance of tweets with respect to a certain topic. To reach both goals we decided to build a set of query.
+The queries reported in this paper are also included in a final script that solve the problem for this specific set of data. The script is essentially developed in c++ 2011. The connector for mySql is developed in C. For more information about it and to clone the complete code hosted on GitHub platform follow this link: \url{https://github.com/lucacremona/progettoTIS}
 \subsection{Bot Filtering}
 \medskip
-The problem of bot filtering from a dataset tweet was analysed using a blacklist approach. The basic idea is to group the tweet by users counting the number of tweets coming from a particular period of time. Following what has already been described extensively in the literature it has been necessary the adoption of a threshold. This threshold has been set at approximately to 4 tweets per day per user(figure \ref{fig:tweeDay} represent result of a study about " normal number of tweet per day ").
+The problem of bot filtering from a dataset tweet has been analysed using a blacklist approach. The basic idea is to group the tweet by users counting the number of tweets coming from a particular period of time. Following what has already been described extensively in literature, the adoption of a threshold has been necessary. This threshold has been set approximately to 4 tweets per day per user(figure \ref{fig:tweeDay} represent result of a study about " normal number of tweet per day ").
 \begin{figure} [!htbp]
 	\centering
 	\vspace{0.3cm}
@@ -137,9 +137,9 @@ The problem of bot filtering from a dataset tweet was analysed using a blacklist
 	\vspace{0.3cm}
 	\label{fig:tweeDay}
 \end{figure}
-Our specific dataset represent the observation of Twitter platform for one week, during the Milano Fashion Week 2015 event, for this reason we use a global approximate parameter of 30 tweet/week per user. Another parameter that has been taken into account is the number of retweets for each user in a given time interval.The characteristics of the data set provided allow us to set the threshold for the retweet at 15 tweets/week per user.
+Our specific dataset represents the observation of Twitter platform for one week, during the Milano Fashion Week 2015 event, for this reason we use a global approximate parameter of 30 tweet/week per user. Another parameter that has been taken into account is the number of retweets for each user in a given time interval.The characteristics of the data set provided allow us to set the threshold for the retweet at 15 tweets/week per user.
 \newpage
-The following snippet of code represent the query used to blacklist the bot user.
+The following snippet of code represents the queries used to blacklist the bot user.
 \begin{lstlisting}
 INSERT INTO mfw.mfw_no_bot
 					(SELECT * 
@@ -160,7 +160,7 @@ INSERT INTO mfw.mfw_no_bot
 \end{lstlisting}
 \subsection{Pertinence Analysis}
 \medskip
-For the pertinence analysis we try some technique based essentially on two metrics: Soundex and Levenshtein.
+For the pertinence analysis we try some techniques based essentially on two metrics: Soundex and Levenshtein.
 \begin{itemize}
 	\item
 	Levenshtein distance:
@@ -169,12 +169,12 @@ For the pertinence analysis we try some technique based essentially on two metri
 	$$Lev_{a,b}(i,j)=\begin{cases} max(i,j), & \mbox{if }min(i,j)=0 \\ min \begin{cases}	Lev_{a,b}(i-1,j)+1, & \\Lev_{a,b}(i,j-1)+1,&\\Lev_{a,b}(i-1,j-1)+1_{(a_i \ne b_j)} & \end{cases} & \mbox{otherwise }	\end{cases}$$
 	
 	where ${1_{(a_i \ne b_j)}}$ is the indicator function equal to 0 when ${a_i = b_j}$ and equal to 1 otherwise, and $Lev_{a,b}(i,j)$ is the distance between the first $i$ characters of $a$ and the first $j$ characters of $b$.
-	Note that the first element in the minimum corresponds to deletion (from  to ), the second to insertion and the third to match or mismatch, depending on whether the respective symbols are the same.
+	Note that the first element in the minimum corresponds to deletion (from  to), the second to insertion and the third to match or mismatch, depending on whether the respective symbols are the same.
 	For example, the Levenshtein distance between "kitten" and "sitting" is 3, since the following three edits change one into the other, and there is no way to do it with fewer than three edits:
 	\begin{itemize}
 	\item kitten $\to$ sitten (substitution of "s" for "k")
 	\item sitten $\to$ sittin (substitution of "i" for "e")
-	\item sittin $\to$ sitting (insertion of "g" at the end
+	\item sittin $\to$ sitting (insertion of "g" at the end)
 	\end{itemize}
 
 	\item Soundex is a phonetic algorithm for indexing names by sound, as pronounced in English. The goal is for homophones to be encoded to the same representation so that they can be matched despite minor differences in spelling. The algorithm mainly encodes consonants; a vowel will not be encoded unless it is the first letter. Soundex is the most widely known of all phonetic algorithms; improvements to Soundex are the basis for many modern phonetic algorithms.
@@ -199,14 +199,14 @@ Using this algorithm, both "Robert" and "Rupert" return the same string "R163" w
 \end{itemize}
 We try to implement both these algorithms in our project but we obtained unexpected results: both them are phonetic, so they can provide a good analysis on how words are pronounced but there are many cases where two words phonetically similar, have opposite, or very different, meanings.
 For example, in our case, applying SoundEx to the string "Milan Fashion Week", we found that this string is less similar to "Milan Week Fashion" in spite of "Can't load this page".
-For this reason we decided to use a different way to compute the similarity and the pertinence of the tweets. We use some string comparison tools provided by MySql in order to try to match different hash-tag with the same meaning: for example $"\# MilanFashionWeek"$ and $"\# MilanoFashionWeek"$ for us are the same hash-tags. In fact we computed a set of tags pertinent to the argument we treated and also we try to make these "Language Independent" (Italian and English).
+For this reason we decided to use a different way to compute the similarity and the pertinence of the tweets. We use some string comparison tools provided by MySql in order to try to match different hash-tags with the same meaning: for example $"\# MilanFashionWeek"$ and $"\# MilanoFashionWeek"$ for us are the same hash-tags. In fact we computed a set of tags pertinent to the argument we treated and also we try to make these "Language Independent" (Italian and English).
 \medskip
 
 Once done it we compute the pertinence of every tweet, basing on the string contained in the tweet: we computed five sets, each of them containing string of different level of pertinence and finally we assign to every tweet a class of pertinence.
 Results show us that more or less most of tweets not generated by bots are pertinent to the treated theme.
 \medskip
 
-The following snippet of code is only and example of query used to filter the tweet with a certain level of pertinence.
+The following snippet of code is only an example of query used to filter the tweets with a certain level of pertinence.
 \begin{lstlisting}
 INSERT IGNORE INTO mfw.mfw_nb_similarity
 							(SELECT * , (WEIGHT_SET)
@@ -225,13 +225,13 @@ INSERT IGNORE INTO mfw.mfw_nb_similarity
 										  )
 							 );
 \end{lstlisting}
- The use of IGNORE into query allow us to not overwrite a tweet with a great level of pertinence with one with lower lever. WEIGHT\_SET is a parameter defined by user that correspond to the level of pertinence for the specific query.
+ The use of IGNORE into query allow us to not overwrite a tweet with a great level of pertinence with one with a lower lever. WEIGHT\_SET is a parameter defined by user that correspond to the level of pertinence for the specific query.
 \subsection{Data Validation}
-To verify the consistence, the correctness of the data produced we decide to inspect by hand a set of data before and after the execution of a query. The method adopted is called "Precision and Recall" and consist into:
+To verify the consistence and the correctness of the produced data, we decided to inspect by hand a set of data before and after the execution of a query. The method adopted is called "Precision and Recall" and consists into:
 \begin{itemize}
-	\item take a sample set of record of the database composed by a prefixed, a priori, number of relevant and non relevant information;
-	\item apply the same algoritm used for entire dataset;
-	\item estimate in percentage the accuracy of data:
+	\item taking a sample set of records of the database composed by a prefixed, a priori, number of relevant and non relevant information;
+	\item applying the same algoritm used for entire dataset;
+	\item estimating in percentage the accuracy of data:
 	\begin{enumerate}
 	\item precision: ratio of the number of relevant records retrieved to the total number of irrelevant and relevant records retrieved
 	\item recall: the ratio of the number of relevant records retrieved to the total number of relevant records in the database
@@ -252,15 +252,17 @@ The self explicative table show our result with respect to data validation.
 Where A:= number of relevant records retrieved; B:= number of relevant records not retrieved; C:= number of irrelevant records retrieved;
 
 \section{Conclusions}\label{sec:conclusions}
-In the Experimental Analysis section we have described essentially which methods we adopt to solve that specific problem and we say that the output of our work are two new table in our database. From the data extract from this new two table we can do some observations. First it is easily seen as the elimination of the bot has led to a decrease in lines of about 66\% of the possible tweet. An interesting result that shows that bots detected affect heavily both on the actual amount of data extracted and on the quality and reliability analysis of the data itself. Using the data extracted from the second table it is important to notice that the total amount of tweet are reduced of only 2000 tweet, this is a good index of quality of the pertinence of data provided. In the figure \ref{fig:histogram} is showed an histogram that represent the number of tweet per class. We have over 45000 tweet with 100 \% of pertinence with the main topic "Milan Fasion Week 2015" the other classes are very low with respect to the first one. From this result we can conclude that in that specific period of time during the "Milan Fasion Week 2015" people who talk about fashion are talking, in most of the case (80 \% of time), of the main event. This gives immediately the idea of the echo that had an event on social networks.
+In the Experimental Analysis section we have described essentially which methods we adopt to solve that specific problem. The outputs of our work are two new tables in our database. From the data extract from these new two tables we can do some observations. First, it is easily seen as the elimination of the bot has led to a decrease in lines of about 66\% of the possible tweets. An interesting result that shows that bots detected affect heavily both on the actual amount of data extracted and on the quality and reliability analysis of the data itself. Using the data extracted from the second table it is important to notice that the total amount of tweets are reduced of only 2000 tweets, this is a good index of quality of the pertinence of data provided. An histogram that represents the number of tweets per class is showed in figure \ref{fig:histogram}. We have over 45000 tweets with 100 \% of pertinence with the main topic "Milan Fasion Week 2015" the other classes are very low with respect to the first one. From this result we can conclude that in that specific period of time during the "Milan Fasion Week 2015" people who talk about fashion are talking, in most of the case (80 \% of time), of the main event. This gives immediately the idea of the echo that an event had on social networks.
 \medskip
-It is important to remember that we decide to don't use all column of the table provided because our algorithm don't need it but it can contain some important information about tweet: for example date and time of the tweet could be used to establish how frequently some user or candidate bot create a tweet during a period of time. Another important information that could be used for pertinence in the country of the user and the localization of the user when he/she wrote the tweet. This can also add some useful information about the international or national weight of an event like Milan Fashion Week.
+
+It is important to remember that we decide not to use all column of the table provided because our algorithm does not need it but it can contain some important information about tweets: for example date and time of the tweet could be used to establish how frequently some user or candidate bot create a tweet during a period of time. Another important information that could be used for pertinence in the country of the user and the localization of the user when he/she wrote the tweet. This can also add some useful information about the international or national weight of an event like Milan Fashion Week.
 \medskip
-In the previous sections we illustrated the proposed algorithms, first to filter the bots from a specific set of data and last to group the tweets about their relevance in the "fashion" context. The first critic that could be moved to these algorithms is a general lack of universality. In fact both algorithm, for similar reason, require some human intervention before their execution. The "bot filter" algorithm was calibrated by end, estimating the mean number of tweets per day and consequently the mean number of tweets per week. It is obvious that changing this assumption over the domain, the result can change significantly. The latter algorithm is glaring example of what machine could not, for now, do: as matter of fact the keyword to build the pertinence class were chosen "by hand" during all work. In a future implementation, this work could be done completely by an algorithm using the power of semantic search. Google Knowledge Graph, the engine at the base of modern software like Google Now, could be integrated to generate keyword for retrieving data with the query. The second critics about that algorithms are linked to the performance. We have built a relational database with only one big table with no specific optimization. Something about index, hash table based for example, could be done. Another future evolution, after the extraction of data, is to try to store the information about their relevance in RDF/graph database to improve next access to the information.
+
+In the previous sections we illustrated the proposed algorithms, first to filter the bots from a specific set of data and last to group the tweets about their relevance in the "fashion" context. The first critique that could be moved to these algorithms is a general lack of universality. In fact both algorithms, for similar reasons, require some human intervention before their execution. The "bot filter" algorithm has been calibrated by end, estimating the mean number of tweets per day and consequently the mean number of tweets per week. It is obvious that changing this assumption over the domain, the result can significantly change. The latter algorithm is glaring example of what machine could not, for now, do: as matter of fact the keywords to build the pertinence class have been chosen "by hand" during all work. In a future implementation, this work could be done completely by an algorithm using the power of semantic search. Google Knowledge Graph, the engine at the base of modern software like Google Now, could be integrated to generate keyword for retrieving data with the query. The second critique about that algorithms are linked to the performance. We have built a relational database with only one big table with no specific optimization. Something about index, hash table based for example, could be done. Another future evolution, after the extraction of data, is to try to store the information about their relevance in RDF/graph database to improve next access to the information.
 \begin{figure} [!htbp]
 	\centering
 	\vspace{0.3cm}
-	\includegraphics[scale=0.59]{images/hystogram}
+	\includegraphics[scale=0.56]{images/hystogram}
 	\caption{Histogram of tweet per pertinence class}
 	\vspace{0.3cm}
 	\label{fig:histogram}
