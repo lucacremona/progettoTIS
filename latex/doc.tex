@@ -106,7 +106,7 @@ Released in 2014, "Bot or Not?" was the first social bot detection interface for
 \begin{figure} [!htbp]
 	\centering
 	\vspace{0.3cm}
-	\includegraphics[scale=0.7]{images/tweetbot}
+	\includegraphics[scale=0.6]{images/tweetbot}
 	\caption{Comparison behaviours between human and bot}
 	\vspace{0.3cm}
 	\label{fig:tweetbot}
@@ -132,13 +132,13 @@ The problem of bot filtering from a dataset tweet has been analysed using a blac
 \begin{figure} [!htbp]
 	\centering
 	\vspace{0.3cm}
-	\includegraphics[scale=0.7]{images/daytweet}
+	\includegraphics[scale=0.6]{images/daytweet}
 	\caption{Retweet by dayly tweet frequency}
 	\vspace{0.3cm}
 	\label{fig:tweeDay}
 \end{figure}
 Our specific dataset represents the observation of Twitter platform for one week, during the Milano Fashion Week 2015 event, for this reason we use a global approximate parameter of 30 tweet/week per user. Another parameter that has been taken into account is the number of retweets for each user in a given time interval.The characteristics of the data set provided allow us to set the threshold for the retweet at 15 tweets/week per user.
-\newpage
+
 The following snippet of code represents the queries used to blacklist the bot user.
 \begin{lstlisting}
 INSERT INTO mfw.mfw_no_bot
@@ -237,7 +237,7 @@ To verify the consistence and the correctness of the produced data, we decided t
 	\item recall: the ratio of the number of relevant records retrieved to the total number of relevant records in the database
 \end{enumerate}
 \end{itemize}
-
+Having found the relevant tweets with the queries, and so having already a precise method to intercept the records containing the keywords related to the fashion world, we decided to concentrate on the tweets that have been removed from the relevant set. We noticed that from the original database we were able to find 64954 records that are considered created by humans and not by bots. 62873 of these (we can call this number A) have been cataloged in the five categories described above, so the remaining 2081 tweets (C) were marked as irrelevant records. We inspected by hand this set of tweets and we discovered that the number of relevant records not retrieved with the previous method was 3 (B).
 The self explicative table show our result with respect to data validation.
 \medskip
 
@@ -262,7 +262,7 @@ In the previous sections we illustrated the proposed algorithms, first to filter
 \begin{figure} [!htbp]
 	\centering
 	\vspace{0.3cm}
-	\includegraphics[scale=0.56]{images/hystogram}
+	\includegraphics[scale=0.6]{images/hystogram}
 	\caption{Histogram of tweet per pertinence class}
 	\vspace{0.3cm}
 	\label{fig:histogram}

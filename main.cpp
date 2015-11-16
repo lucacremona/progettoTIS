@@ -43,7 +43,7 @@ int main() {
     MYSQL_ROW row;
     char *server = "localhost";
     char *user = "root";
-    char *password = "melone"; /* set me first */
+    char *password = "root"; /* set me first */
     char *database = "mfw";
     conn = mysql_init(NULL);
     /* Connect to database */
